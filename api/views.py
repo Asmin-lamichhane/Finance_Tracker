@@ -2,7 +2,7 @@ from rest_framework import viewsets, permissions, filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.db.models import Sum
-# from django_filters.rest_framework import DjangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import Category, Transaction
 from .serializers import CategorySerializer, TransactionSerializer
@@ -24,9 +24,9 @@ class TransactionViewSet(viewsets.ModelViewSet):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
     # permission_classes = [permissions.IsAuthenticated]
-    # filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    # filterset_fields = ['transaction_type', 'category']
-    # search_fields = ['description']
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filterset_fields = ['transaction_type', 'category']
+    search_fields = ['description','transaction_type']
     permission_classes = [permissions.AllowAny]
 
     # def get_queryset(self):
